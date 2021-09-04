@@ -2,6 +2,7 @@ package com.example.validation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -66,6 +67,20 @@ Button login;
                 password.setError(null);
                 proceedToLogin = true;
             }
+            if(proceedToLogin) {
+                if (ConnectivityReceiver.isConnected(this)){
+                    new RegistrationRequest().execute();
+                }
+                else {
+
+                    Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+            return proceedToLogin;
+
+        }
         });
     }
-    }
+}
+
