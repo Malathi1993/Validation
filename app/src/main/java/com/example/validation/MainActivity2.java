@@ -10,14 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
 EditText phonenumberr;
 EditText passwordd;
 Button login;
+TextView register;
+
     String mobilePattern = "[5]{1}[0-9]{11}";
-         String passwordPattern = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
+    String passwordPattern = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +30,23 @@ Button login;
         phonenumberr = findViewById(R.id.editTextPhone);
         passwordd = findViewById(R.id.editTextTextPassword3);
         login = findViewById(R.id.Login);
-
+        register = findViewById(R.id.register);
 
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setValidation();
-
+//                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+//                startActivity(intent);
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // redirect to RegisterActivity
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -43,8 +55,6 @@ Button login;
         private boolean setValidation(){
            String  phonenumber = phonenumberr.getText().toString();
             String password= passwordd.getText().toString();
-//
-
 
             if (phonenumber.length() == 0) {
                 phonenumberr.setError(getResources().getString(R.string.mobile_no_not_valid));
@@ -69,7 +79,8 @@ Button login;
                 passwordd.setError(null);
                 return false;
             }
-        };
 
-}
+        }
+
+        };
 

@@ -4,7 +4,7 @@
     <string name="mobile_no_not_valid9">mobile_no_not_valid9</string>
     <string name="mobilenosholdstartdigit5">mobile no shold start digit 5</string>
     <string name="passwordshouldnotbeempty">password should not be empty</string>
-    <string name="passwordshouldconatins">password should conatins</string>
+    <string name="passwordshouldconatins">password should contains  with AlphaNumarics </string>
     <string name="mineightdigit">min eight digit</string>
     <string name="clickonterms">click on terms</string>
 </resources>
