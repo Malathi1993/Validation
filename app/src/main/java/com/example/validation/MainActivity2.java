@@ -13,17 +13,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
-EditText phonenumber;
-EditText password;
+EditText phonenumberr;
+EditText passwordd;
 Button login;
+    String mobilePattern = "[5]{1}[0-9]{11}";
+         String passwordPattern = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        phonenumber = findViewById(R.id.editTextPhone);
-        password = findViewById(R.id.editTextTextPassword3);
+        phonenumberr = findViewById(R.id.editTextPhone);
+        passwordd = findViewById(R.id.editTextTextPassword3);
         login = findViewById(R.id.Login);
 
 
@@ -31,56 +33,43 @@ Button login;
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetValidation();
+                setValidation();
+
             }
         });
 
-        private void SetValidation() {
-            String mobilePattern = "[5]{1}[0-9]{11}";
-           String passwordPattern = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
-            phonenumber = phonenumber.getText().toString();
-            password = password.getText().toString();
+    }
+
+        private boolean setValidation(){
+           String  phonenumber = phonenumberr.getText().toString();
+            String password= passwordd.getText().toString();
+//
+
 
             if (phonenumber.length() == 0) {
-                phonenumber.setError(getResources().getString(R.string.mobile_no_not_valid));
-                proceedToLogin = false;
+                phonenumberr.setError(getResources().getString(R.string.mobile_no_not_valid));
+                return false;
             } else if (phonenumber.length() < 9) {
-                phonenumber.setError(getResources().getString(R.string.mobile_no_not_valid9));
-                proceedToLogin = false;
+                phonenumberr.setError(getResources().getString(R.string.mobile_no_not_valid9));
+                return false;
             } else if (phonenumber.charAt(0) != '5') {
-                phonenumber.setError(getResources().getString(R.string.mobilenosholdstartdigit5));
-                proceedToLogin = false;
+                phonenumberr.setError(getResources().getString(R.string.mobilenosholdstartdigit5));
+                return false;
             } else if (password.length() == 0) {
-                password.setError(getResources().getString(R.string.passwordshouldnotbeempty));
-                proceedToLogin = false;
-            } else if (!passwordd.matches(passwordPattern)) {
-                password.setError(getResources().getString(R.string.passwordshouldconatins));
-                proceedToLogin = false;
-            } else if (passwordd.length() < 8) {
-                password.setError(getResources().getString(R.string.mineightdigit));
-                proceedToLogin = false;
-            } else if (!checkBox.isChecked()) {
-                Toast.makeText(this, getString(R.string.clickonterms), Toast.LENGTH_SHORT).show();
-                proceedToLogin = false;
+                passwordd.setError(getResources().getString(R.string.passwordshouldnotbeempty));
+                return false;
+            } else if (!password.matches(passwordPattern)) {
+                passwordd.setError(getResources().getString(R.string.passwordshouldconatins));
+                return false;
+            } else if (password.length() < 8) {
+                passwordd.setError(getResources().getString(R.string.mineightdigit));
+                return false;
             } else {
-                password.setError(null);
-                password.setError(null);
-                proceedToLogin = true;
+                passwordd.setError(null);
+                passwordd.setError(null);
+                return false;
             }
-            if(proceedToLogin) {
-                if (ConnectivityReceiver.isConnected(this)){
-                    new RegistrationRequest().execute();
-                }
-                else {
+        };
 
-                    Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-            return proceedToLogin;
-
-        }
-        });
-    }
 }
 
