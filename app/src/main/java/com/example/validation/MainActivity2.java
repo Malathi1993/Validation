@@ -21,7 +21,7 @@ TextView register;
 
     String mobilePattern = "[5]{1}[0-9]{11}";
     String passwordPattern = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";
-
+  // String passwordPattern =( "^"+ "(?=.[0-9])"+ "(?=.[a-z])"+ "(?=.[A-Z])"+ "(?=.[!@#$%()'*,-./:;<=>?['\']^_'{|}&+=])"+ "(?=\\S+$)"+ ".{8,16}"+ "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +37,9 @@ TextView register;
             @Override
             public void onClick(View v) {
                 setValidation();
-//                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-//                startActivity(intent);
             }
         });
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,16 +50,15 @@ TextView register;
         });
 
     }
-
         private boolean setValidation(){
            String  phonenumber = phonenumberr.getText().toString();
             String password= passwordd.getText().toString();
 
             if (phonenumber.length() == 0) {
-                phonenumberr.setError(getResources().getString(R.string.mobile_no_not_valid));
+                phonenumberr.setError(getResources().getString(R.string.Entermobilenumber));
                 return false;
             } else if (phonenumber.length() < 9) {
-                phonenumberr.setError(getResources().getString(R.string.mobile_no_not_valid9));
+                phonenumberr.setError(getResources().getString(R.string.mobilenonotvalid));
                 return false;
             } else if (phonenumber.charAt(0) != '5') {
                 phonenumberr.setError(getResources().getString(R.string.mobilenosholdstartdigit5));
@@ -74,7 +72,11 @@ TextView register;
             } else if (password.length() < 8) {
                 passwordd.setError(getResources().getString(R.string.mineightdigit));
                 return false;
-            } else {
+            } else if (password.length() > 16) {
+                passwordd.setError(getResources().getString(R.string.maxsixteendigit));
+                return false;
+            }
+            else {
                 passwordd.setError(null);
                 passwordd.setError(null);
                 return false;
@@ -82,5 +84,5 @@ TextView register;
 
         }
 
-        };
+};
 

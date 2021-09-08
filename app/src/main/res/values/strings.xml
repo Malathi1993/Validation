@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Validation</string>
-    <string name="mobile_no_not_valid">mobile_no_not_valid</string>
-    <string name="mobile_no_not_valid9">mobile_no_not_valid9</string>
-    <string name="mobilenosholdstartdigit5">mobile no shold start digit 5</string>
+    <string name="Entermobilenumber">Enter mobile number</string>
+    <string name="mobilenonotvalid">mobile no not valid</string>
+    <string name="mobilenoshouldstartdigit5">mobile no should start digit 5</string>
     <string name="passwordshouldnotbeempty">password should not be empty</string>
-    <string name="passwordshouldconatins">password should contains  with AlphaNumarics </string>
+    <string name="passwordshouldconatins">password should contains  with Uppercase,Lowercase,Special,Number</string>
     <string name="mineightdigit">min eight digit</string>
+    <string name="maxsixteendigit">max sixteen digit</string>
     <string name="clickonterms">click on terms</string>
+    <string name="mobilenosholdstartdigit5">mobilenosholdstartdigit5</string>
 </resources>
