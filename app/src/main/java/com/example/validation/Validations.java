@@ -185,4 +185,67 @@ public class Validations {
 
 
 
-}
+==========================
+
+        var mobile_email: String = phonumber?.getText().toString()
+        mobile_email = mobile_email.trim { it <= ' ' }
+        println("========username lenght is====" + mobile_email.length)
+        if (mobile_email.length == 0) {
+        phonumber?.setError(resources.getString(R.string.mobilenoshouldnotempty))
+        proceedToLogin = false
+        }
+        else if (!Pattern.matches("[a-zA-Z]+", mobile_email)) {
+        // if (Constants.DB.equals("SA")) {
+        if (mobile_email.length >= 10 || mobile_email.length <= 8) {
+        phonumber!!.setError(resources.getString(R.string.mobile_no_not_valid))
+        proceedToLogin = false
+        } else if (mobile_email[0] != '5') {
+        phonumber!!.setError(resources.getString(R.string.mobilenosholdstartdigit5))
+        proceedToLogin = false
+
+        } else {
+
+        phonumber?.setError(null)
+
+        //proceedToLogin = true
+        }
+        if (proceedToLogin) {
+        unaame = phonumber!!.text.toString()
+
+
+
+        ApplicationSharedPref.init(this)
+        co_code = country_code!!.text.toString().substring(1)
+        ApplicationSharedPref.write(ApplicationSharedPref.KUANAME, co_code + unaame)
+
+
+        if (Connectivity.isConnected(this)) {
+        LoginRequest().execute()
+        } else {
+        NetWorkErrorPopup.callDailog(this)
+        }
+        }
+        }
+        }
+
+        =========================================
+        fun initValidationsmpin(): Boolean {
+        var validation = false
+        val currentpassword = mpin!!.text.toString().trim { it <= ' ' }
+        val confirmpassword = confirmmpin!!.text.toString().trim { it <= ' ' }
+        if (currentpassword.length <= 0) {
+        mpin!!.error = getString(R.string.entercurrentmpin)
+        } else if (currentpassword.length < 6 || currentpassword.length > 6) {
+        mpin!!.error = getString(R.string.mpin_should_be_6digit_only)
+        }  else if (confirmpassword.length <= 0) {
+        confirmmpin!!.error = getString(R.string.confirmpassword)
+        } else if (confirmpassword.length < 6 || confirmpassword.length > 6) {
+        confirmmpin!!.error = getString(R.string.mpin_should_be_6digit_only)
+        } else if (confirmpassword != currentpassword) {
+        confirmmpin!!.error = getString(R.string.mpin_didnt_match)
+        }
+        else {
+        validation = true
+        }
+        return validation
+        }
